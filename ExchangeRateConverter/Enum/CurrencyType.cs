@@ -1,4 +1,4 @@
-﻿namespace ExchangeRateConverter
+﻿namespace ExchangeRateConverter.Enum
 {
     public enum CurrencyType
     {

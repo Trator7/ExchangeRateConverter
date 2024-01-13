@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using ExchangeRateConverter.Entities;
+using ExchangeRateConverter.Enum;
 
 namespace ExchangeRateConverter
 {

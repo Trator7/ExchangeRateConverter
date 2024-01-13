@@ -1,4 +1,6 @@
 using ExchangeRateConverter;
+using ExchangeRateConverter.Entities;
+using ExchangeRateConverter.Enum;
 
 namespace ExchangeRateConverterTest
 {

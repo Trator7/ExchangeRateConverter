@@ -1,7 +1,8 @@
 ﻿using System.Text;
 using System.Text.Json.Serialization;
+using ExchangeRateConverter.Enum;
 
-namespace ExchangeRateConverter
+namespace ExchangeRateConverter.Entities
 {
     public class ExchangeRate
     {
