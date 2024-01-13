@@ -71,6 +71,28 @@ namespace ExchangeRateConverter
             return amount * GetExchangeRateAtDate(currencyFrom, currencyTo, date);
         }
 
+        public static double GetClosestRateToDate(Dictionary<DateTime, double> rates, DateTime date)
+        {
+            int daysBefore = 0;
+            int maxDays = Settings.Default.MaxNumberOfDaysBeforeError;
+            double rate = 0;
+
+            do
+            {
+                if (rates.ContainsKey(date))
+                {
+                    rate = rates[date];
+                }
+                else
+                {
+                    daysBefore++;
+                    date = date.AddDays(-1 * daysBefore);
+                }
+            } while (rate == 0 && daysBefore < maxDays);
+
+            return rate;
+        }
+
         private static Dictionary<DateTime, double> GetEurToTargetCurrencyRates(CurrencyType currencyType)
         {
             if (!EurToCurrencyRateDict.ContainsKey(currencyType))
@@ -121,28 +143,6 @@ namespace ExchangeRateConverter
             }
             
             return rates;
-        }
-
-        private static double GetClosestRateToDate(Dictionary<DateTime, double> rates, DateTime date)
-        {
-            int daysBefore = 0;
-            int maxDays = Settings.Default.MaxNumberOfDaysBeforeError;
-            double rate = 0;
-
-            do
-            {
-                if (rates.ContainsKey(date))
-                {
-                    rate = rates[date];
-                }
-                else
-                {
-                    daysBefore++;
-                    date = date.AddDays(-1 * daysBefore);
-                }
-            } while (rate == 0 && daysBefore < maxDays);
-
-            return rate;
         }
 
         private static void SaveCurrentDataAsJson()

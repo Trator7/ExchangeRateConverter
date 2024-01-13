@@ -8,7 +8,7 @@ All the tranformations that doesn't have EUR as origin or target are computed as
 
 # Public methods to retrieve data
 
-## Dictionary<DateTime, double> GetCurrencyRates
+## GetCurrencyRates
 ### Description
 Return a dictionary with all available rates for specific currencies
 ### Input arguments
@@ -17,18 +17,17 @@ Return a dictionary with all available rates for specific currencies
 ### Return object
 Dictionary<DateTime, double>: dictionary with date as Key and Rate as value
  
-## GetExchangeRateAtDate(CurrencyType currencyFrom, CurrencyType currencyTo, DateTime date)
+## GetExchangeRateAtDate
 ### Description
-Returns a rate to transfrom from currencyFrom currency type to currencyTo type at specific date
+Returns a rate from currencyFrom currency type to currencyTo type for specific date or the closest previous value.
 ### Input arguments
 * CurrencyType currencyFrom: original currency type.
 * CurrencyType currencyTo: target currency type.
-* Date: date of the rate to retrieve.
+* DateTime Date: date of the rate to retrieve.
 ### Return object
-double: specific exchange rate for an specific date
+double: specific exchange rate for an specific date or closest previous one.
 
-## ConvertAmount(double amount, CurrencyType currencyFrom, CurrencyType currencyTo)
-ConvertAmount(double amount, CurrencyType currencyFrom, CurrencyType currencyTo, DateTime date)
+## ConvertAmount
 ### Description
 Return a dictionary with all available rates for specific currencies
 ### Input arguments
@@ -38,3 +37,12 @@ Return a dictionary with all available rates for specific currencies
 * Date: date of the rate to use in the conversion.
 ### Return object
 double: value of the converted amount.
+
+## GetClosestRateToDate(Dictionary<DateTime, double> rates, DateTime date)
+### Description
+Return the closets rate to the specified rate from the provieded rates
+### Input arguments
+* Dictionary<DateTime, double> rates: dictionary of dates and rates to search for closest rate.
+* DateTime Date: date of the rate to retrieve.
+### Return object
+double: specific exchange rate for an specific date or closest previous one.

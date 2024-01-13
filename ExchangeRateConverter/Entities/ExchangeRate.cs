@@ -44,7 +44,7 @@ namespace ExchangeRateConverter.Entities
 
         public double GetExchangeRate(DateTime date)
         {
-            return CurrencyTypeFrom == CurrencyTypeTo ? 1 : Rates[date.Date];
+            return CurrencyTypeFrom == CurrencyTypeTo ? 1 : ExchangeRateTool.GetClosestRateToDate(Rates, date.Date);
         }
 
         public override string ToString()
