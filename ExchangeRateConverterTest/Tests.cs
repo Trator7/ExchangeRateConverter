@@ -51,5 +51,13 @@ namespace ExchangeRateConverterTest
             double newAmount = ExchangeRateTool.ConvertAmount(100, CurrencyType.EUR, CurrencyType.USD, new DateTime(2023, 06, 06));
             Assert.IsTrue(Math.Round(newAmount, 2) == 106.83);
         }
+
+        [Test]
+        public void TestClosestRateWhenEmpty()
+        {
+            double nonExistenRateDay = Math.Round(ExchangeRateTool.GetExchangeRateAtDate(CurrencyType.USD, CurrencyType.GBP, new DateTime(2024, 1, 1)), 4);
+            double theoricalClosestDay = Math.Round(ExchangeRateTool.GetExchangeRateAtDate(CurrencyType.USD, CurrencyType.GBP, new DateTime(2023, 12, 29)), 4);
+            Assert.IsTrue(nonExistenRateDay == theoricalClosestDay);
+        }
     }
 }

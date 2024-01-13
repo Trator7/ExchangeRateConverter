@@ -10,9 +10,8 @@ namespace ExchangeRateConverter
     public static class ExchangeRateTool
     {
         private static readonly string DEFAULT_DATA_FOLDER = "../DefaultExchangeRateConverter";
-        private static readonly string DEFAULT_DATA_FILENAME = "ExchangeRateData.json";
 
-        private static readonly string s_dataFolder = Path.Combine(ConfigurationManager.AppSettings["DataFolder"] ?? DEFAULT_DATA_FOLDER, ConfigurationManager.AppSettings["ExchangeRateToolDataFileName"] ?? DEFAULT_DATA_FILENAME);
+        private static readonly string s_dataFolder = Path.Combine(Settings.Default.DataFolder, Settings.Default.ExchangeRateToolDataFileName);
         private static readonly Regex s_dateRegex = new Regex(@"\d+,\d+,\d+", RegexOptions.Compiled);
         private static readonly Regex s_rateRegex = new Regex(@"\d+\.?\d*", RegexOptions.Compiled);
 
@@ -59,7 +58,7 @@ namespace ExchangeRateConverter
 
         public static double GetExchangeRateAtDate(CurrencyType currencyFrom, CurrencyType currencyTo, DateTime date)
         {
-            return GetCurrencyRates(currencyFrom, currencyTo)[date.Date];
+            return GetClosestRateToDate(GetCurrencyRates(currencyFrom, currencyTo), date.Date);
         }
 
         public static double ConvertAmount(double amount, CurrencyType currencyFrom, CurrencyType currencyTo)
@@ -122,6 +121,28 @@ namespace ExchangeRateConverter
             }
             
             return rates;
+        }
+
+        private static double GetClosestRateToDate(Dictionary<DateTime, double> rates, DateTime date)
+        {
+            int daysBefore = 0;
+            int maxDays = Settings.Default.MaxNumberOfDaysBeforeError;
+            double rate = 0;
+
+            do
+            {
+                if (rates.ContainsKey(date))
+                {
+                    rate = rates[date];
+                }
+                else
+                {
+                    daysBefore++;
+                    date = date.AddDays(-1 * daysBefore);
+                }
+            } while (rate == 0 && daysBefore < maxDays);
+
+            return rate;
         }
 
         private static void SaveCurrentDataAsJson()
