@@ -6,6 +6,8 @@ All the tranformations that doesn't have EUR as origin or target are computed as
 1. Retrieve EUR to Target currency rates
 1. Compute Orinal to Target based on previous rates.
 
+If there is no rate in a specific date the previous closest one will be returned.
+
 # Public methods to retrieve data
 
 ## Dictionary<DateTime, double> GetCurrencyRates
