@@ -40,7 +40,7 @@ Return a dictionary with all available rates for specific currencies
 ### Return object
 double: value of the converted amount.
 
-## GetClosestRateToDate(Dictionary<DateTime, double> rates, DateTime date)
+## GetClosestRateToDate
 ### Description
 Return the closets rate to the specified rate from the provieded rates
 ### Input arguments
