@@ -36,7 +36,7 @@ namespace ExchangeRateConverter
             }
             else if (currencyTo == CurrencyType.EUR)
             {
-                return GetOriginalCurrencyToEurRates(currencyTo);
+                return GetOriginalCurrencyToEurRates(currencyFrom);
             }
             else
             {

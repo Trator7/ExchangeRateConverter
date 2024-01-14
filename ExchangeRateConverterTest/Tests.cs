@@ -59,5 +59,11 @@ namespace ExchangeRateConverterTest
             double theoricalClosestDay = Math.Round(ExchangeRateTool.GetExchangeRateAtDate(CurrencyType.USD, CurrencyType.GBP, new DateTime(2023, 12, 29)), 4);
             Assert.IsTrue(nonExistenRateDay == theoricalClosestDay);
         }
+
+        [Test]
+        public void TestReverseEurRate()
+        {            
+            Assert.IsTrue(Math.Round(ExchangeRateTool.GetExchangeRateAtDate(CurrencyType.USD, CurrencyType.EUR, new DateTime(2022, 02, 16)), 4) == 0.8794);
+        }
     }
 }
