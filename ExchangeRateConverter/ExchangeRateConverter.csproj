@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/Trator7/ExchangeRateConverter</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <Company>Jose Juan Preciado Sanchez</Company>
+    <Authors>Jose Juan Preciado Sanchez</Authors>
     <Description>Simple library to retrieve exchange rates from BCE.</Description>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
