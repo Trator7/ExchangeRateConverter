@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Trator7/ExchangeRateConverter</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -15,7 +15,7 @@
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>exchange; rate; converter;</PackageTags>
-    <PackageReleaseNotes>First package release with all the basic operations.</PackageReleaseNotes>
+    <PackageReleaseNotes>Remove unnecesary dependencies.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,10 +27,6 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
   </ItemGroup>
 
 </Project>
