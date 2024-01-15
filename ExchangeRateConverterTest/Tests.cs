@@ -62,7 +62,7 @@ namespace ExchangeRateConverterTest
 
         [Test]
         public void TestReverseEurRate()
-        {            
+        {
             Assert.IsTrue(Math.Round(ExchangeRateTool.GetExchangeRateAtDate(CurrencyType.USD, CurrencyType.EUR, new DateTime(2022, 02, 16)), 4) == 0.8794);
         }
     }

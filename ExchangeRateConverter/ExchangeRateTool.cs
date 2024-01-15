@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using ExchangeRateConverter.Entities;
@@ -9,9 +8,22 @@ namespace ExchangeRateConverter
 {
     public static class ExchangeRateTool
     {
-        private static readonly string DEFAULT_DATA_FOLDER = "../DefaultExchangeRateConverter";
+        public static string DataDirectory { get; set; } = "../DefaultExchangeRateConverter";
+        public static string DataFileName { get; set; } = "ExchangeRateData.json";
+        public static string DataFilePath
+        { 
+            get 
+            {
+                return Path.Combine(DataDirectory, DataFileName);
+            } 
+            set 
+            {
+                DataDirectory = Path.GetDirectoryName(value) ?? DataDirectory;
+                DataFileName = Path.GetFileName(value) ?? DataFileName;
+            }
+        }
 
-        private static readonly string s_dataFolder = Path.Combine(Settings.Default.DataFolder, Settings.Default.ExchangeRateToolDataFileName);
+        public static int MaxNumberOfPreviousDaysBeforeError { get; set; } = 20;
         private static readonly Regex s_dateRegex = new Regex(@"\d+,\d+,\d+", RegexOptions.Compiled);
         private static readonly Regex s_rateRegex = new Regex(@"\d+\.?\d*", RegexOptions.Compiled);
 
@@ -74,7 +86,6 @@ namespace ExchangeRateConverter
         public static double GetClosestRateToDate(Dictionary<DateTime, double> rates, DateTime date)
         {
             int daysBefore = 0;
-            int maxDays = Settings.Default.MaxNumberOfDaysBeforeError;
             double rate = 0;
 
             do
@@ -88,7 +99,7 @@ namespace ExchangeRateConverter
                     daysBefore++;
                     date = date.AddDays(-1 * daysBefore);
                 }
-            } while (rate == 0 && daysBefore < maxDays);
+            } while (rate == 0 && daysBefore < MaxNumberOfPreviousDaysBeforeError);
 
             return rate;
         }
@@ -147,14 +158,14 @@ namespace ExchangeRateConverter
 
         private static void SaveCurrentDataAsJson()
         {
-            File.WriteAllText(s_dataFolder, JsonSerializer.Serialize(EurToCurrencyRateDict));
+            File.WriteAllText(DataFilePath, JsonSerializer.Serialize(EurToCurrencyRateDict));
         }
 
         private static Dictionary<CurrencyType, ExchangeRate> LoadCurrentDataAsJson()
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(s_dataFolder) ?? DEFAULT_DATA_FOLDER);
-            return File.Exists(s_dataFolder) ?
-                JsonSerializer.Deserialize<Dictionary<CurrencyType, ExchangeRate>>(File.ReadAllText(s_dataFolder)) ?? new Dictionary<CurrencyType, ExchangeRate>() :
+            Directory.CreateDirectory(DataDirectory);
+            return File.Exists(DataFilePath) ?
+                JsonSerializer.Deserialize<Dictionary<CurrencyType, ExchangeRate>>(File.ReadAllText(DataFilePath)) ?? new Dictionary<CurrencyType, ExchangeRate>() :
                 new Dictionary<CurrencyType, ExchangeRate>();
         }
     }
