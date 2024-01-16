@@ -5,17 +5,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Trator7/ExchangeRateConverter</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <Authors>Jose Juan Preciado Sanchez</Authors>
     <Description>Simple library to retrieve exchange rates from BCE.</Description>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Trator7/ExchangeRateConverter</PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>exchange; rate; converter;</PackageTags>
-    <PackageReleaseNotes>Remove unnecesary dependencies.</PackageReleaseNotes>
+    <PackageReleaseNotes>Improve Readme.md </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
