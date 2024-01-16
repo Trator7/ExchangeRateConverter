@@ -34,8 +34,10 @@ Return a dictionary with all available rates for specific currencies
 ### Return object
 Dictionary<DateTime, double>: dictionary with date as Key and Rate as value
 ### Code Example
+```
 Dictionary<DateTime, double> jpyToIdr = ExchangeRateTool.GetCurrencyRates(CurrencyType.JPY, CurrencyType.IDR);
 Console.WriteLine(jpyToIdr[new DateTime(2024, 1, 12)]);
+```
 
 ## ExchangeRateTool.GetExchangeRateAtDate
 ### Description
@@ -47,8 +49,10 @@ Returns a rate from currencyFrom currency type to currencyTo type for specific d
 ### Return object
 double: specific exchange rate for a given date or nearest one.
 ### Code Example
+```
 double rate = ExchangeRateTool.GetExchangeRateAtDate(CurrencyType.USD, CurrencyType.GBP, new DateTime(2024, 1, 12));
 Console.WriteLine(rate);
+```
 
 ## ExchangeRateTool.ConvertAmount
 ### Description
@@ -61,8 +65,10 @@ Return a dictionary with all available rates for specific currencies
 ### Return object
 double: value of the converted amount.
 ### Code Example
+```
 double newAmount = ExchangeRateTool.ConvertAmount(100, CurrencyType.EUR, CurrencyType.USD, new DateTime(2023, 06, 06));
 Console.WriteLine(newAmount);
+```
 
 ## ExchangeRateTool.GetClosestRateToDate
 ### Description
@@ -73,8 +79,10 @@ Return the closets rate to the specified rate from the provieded rates
 ### Return object
 double: specific exchange rate for a given date or nearest one.
 ### Code Example
+```
 double rate = ExchangeRateTool.GetClosestRateToDate(ExchangeRateTool.GetCurrencyRates(CurrencyType.USD, CurrencyType.GBP), new DateTime(2024, 1, 1));
 Console.WriteLine(rate);
+```
 
 # ExchangeRate Class
 Class that keeps data about exchange rates between currencies.
@@ -87,6 +95,7 @@ Return the closets rate for the current ExchangeRate object given a specific dat
 ### Return object
 double: specific exchange rate for a given date or nearest one.
 ### Code Example
+```
 ExchangeRate eurToEur = new ExchangeRate(CurrencyType.EUR, CurrencyType.EUR);
 Console.WriteLine(eurToEur.Rates.Count);
 Console.WriteLine(eurToEur.GetExchangeRate(DateTime.Now));
@@ -94,3 +103,4 @@ Console.WriteLine(eurToEur.GetExchangeRate(DateTime.Now));
 ExchangeRate eurToUsd = new ExchangeRate(CurrencyType.EUR, CurrencyType.USD);
 Console.WriteLine(eurToUsd.Rates.Count);
 Console.WriteLine(eurToUsd.GetExchangeRate(new DateTime(2022, 8, 31)));
+```
