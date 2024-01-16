@@ -18,11 +18,9 @@ If there is no rate in a specific date the previous closest one will be returned
 # Basic configuration
 There are some static fields that can be modified to determine where to save rates file data and how many days should check before an error is raised when a determined date does not have rate data.
 
-ExchangeRateTool.DataDirectory: Determine the folder where the file data will be stored. Default: "../DefaultExchangeRateConverter".
-ExchangeRateTool.DataFileName: Determine the data file name. Default: "ExchangeRateData.json".
-ExchangeRateTool.DataFilePath: combination of previous fields, you can directly update this field with full path and the other ones will be updated accordingly.
-
-# Public methods to retrieve data
+* **ExchangeRateTool.DataDirectory**: Determine the folder where the file data will be stored. Default: "../DefaultExchangeRateConverter".
+* **ExchangeRateTool.DataFileName**: Determine the data file name. Default: "ExchangeRateData.json".
+* **ExchangeRateTool.DataFilePath**: combination of previous fields, you can directly update this field with full path and the other ones will be updated accordingly.
 
 # ExchangeRateTool Static Class
 Static class with main methods to retrieve and use exchange rates.
@@ -35,7 +33,7 @@ Return a dictionary with all available rates for specific currencies
 * CurrencyType currencyTo: target currency type.
 ### Return object
 Dictionary<DateTime, double>: dictionary with date as Key and Rate as value
-### Example
+### Code Example
 Dictionary<DateTime, double> jpyToIdr = ExchangeRateTool.GetCurrencyRates(CurrencyType.JPY, CurrencyType.IDR);
 Console.WriteLine(jpyToIdr[new DateTime(2024, 1, 12)]);
 
@@ -48,8 +46,8 @@ Returns a rate from currencyFrom currency type to currencyTo type for specific d
 * DateTime Date: date of the rate to retrieve.
 ### Return object
 double: specific exchange rate for a given date or nearest one.
-### Example
-double rate = ExchangeRateTool.GetExchangeRateAtDate(CurrencyType.USD, CurrencyType.GBP, new DateTime(2024, 1, 12))
+### Code Example
+double rate = ExchangeRateTool.GetExchangeRateAtDate(CurrencyType.USD, CurrencyType.GBP, new DateTime(2024, 1, 12));
 Console.WriteLine(rate);
 
 ## ExchangeRateTool.ConvertAmount
@@ -62,7 +60,7 @@ Return a dictionary with all available rates for specific currencies
 * Date: date of the rate to use in the conversion.
 ### Return object
 double: value of the converted amount.
-### Example
+### Code Example
 double newAmount = ExchangeRateTool.ConvertAmount(100, CurrencyType.EUR, CurrencyType.USD, new DateTime(2023, 06, 06));
 Console.WriteLine(newAmount);
 
@@ -74,7 +72,7 @@ Return the closets rate to the specified rate from the provieded rates
 * DateTime Date: date of the rate to retrieve.
 ### Return object
 double: specific exchange rate for a given date or nearest one.
-### Example
+### Code Example
 double rate = ExchangeRateTool.GetClosestRateToDate(ExchangeRateTool.GetCurrencyRates(CurrencyType.USD, CurrencyType.GBP), new DateTime(2024, 1, 1));
 Console.WriteLine(rate);
 
@@ -88,7 +86,7 @@ Return the closets rate for the current ExchangeRate object given a specific dat
 * DateTime Date: date of the rate to retrieve.
 ### Return object
 double: specific exchange rate for a given date or nearest one.
-### Example
+### Code Example
 ExchangeRate eurToEur = new ExchangeRate(CurrencyType.EUR, CurrencyType.EUR);
 Console.WriteLine(eurToEur.Rates.Count);
 Console.WriteLine(eurToEur.GetExchangeRate(DateTime.Now));
